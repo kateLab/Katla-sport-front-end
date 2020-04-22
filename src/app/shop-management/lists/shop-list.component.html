@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Shops for Shop Type</h2>
+  <table class="table table-nonfluid">
+    <thead>
+      <th scope="col">#</th>
+      <th scope="col">Code</th>
+      <th scope="col">Name</th>
+      <th scope="col"></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shop of shops">
+        <th scope="row">{{shop.id}}</th>
+        <td>{{shop.code}}</td>
+        <td>{{shop.name}}</td>
+        <td>
+            <span class="btn-toolbar" role="toolbar" aria-label="Shop action buttons" style="display: block; white-space:nowrap;">
+                <div class="btn-group" role="group" aria-label="Edit group">
+                    <button routerLink="/shopType/{{this.shopTypeId}}/shop/{{shop.id}}" type="button" class="btn btn-primary">Edit</button>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Delete group" *ngIf="!shop.isDeleted" (click)="onDelete(shop.id)">
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Undelete group" *ngIf="shop.isDeleted" (click)="onUndelete(shop.id)">
+                  <button type="button" class="btn btn-success">Undelete</button>
+                </div>
+            </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="btn-toolbar" role="toolbar" aria-label="Action buttons">
+    <div class="btn-group mr-1" role="group" aria-label="Back group">
+      <button routerLink="/types" type="button" class="btn btn-primary">Back</button>
+    </div>
+    <div class="btn-group" role="group" aria-label="Add group">
+      <button routerLink="/shopType/{{this.shopTypeId}}/shop" type="button" class="btn btn-primary">Add shop</button>
+    </div>
+  </div>
+</div>

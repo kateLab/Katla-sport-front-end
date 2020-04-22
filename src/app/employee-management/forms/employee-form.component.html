@@ -1,0 +1,57 @@
+<div class="container">
+  <h2>Employee Editor</h2>
+  <form (ngSubmit)="onSubmit()" #shopForm="ngForm">
+    <div class="form-group" *ngIf='existed'>
+      <label for="idLabel">ID</label>
+      <input type="text" class="form-control" id= "id" aria-describedby="idLabel" [(ngModel)]="employee.id" name="id" #id="ngModel" readonly>
+    </div>
+    <div class="form-group">
+      <label for="name" id="nameLabel">Employee Name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="nameLabel" minlength="4" maxlength="60" required [(ngModel)]="employee.name"
+        name="name" #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors.required">Shop Name is required.</div>
+        <div *ngIf="name.errors.minlength">Shop Name must be at least 4 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="code" id="codeLabel">Shop Surname</label>
+      <input type="text" class="form-control" id="code" aria-describedby="codeLabel" minlength="5" maxlength="70" required [(ngModel)]="employee.surname"
+        name="code" #codeModel="ngModel">
+      <div *ngIf="codeModel.invalid && (codeModel.dirty || codeModel.touched)" class="alert alert-danger">
+        <div *ngIf="codeModel.errors.required">Shop Surname is required.</div>
+        <div *ngIf="codeModel.errors.minlength">Shop Surname must be 5 characters long.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="shopId" id="shopIdLabel">Shop ID</label>
+      <input type="text" class="form-control" id="shopId" aria-describedby="shopIdLabel" minlength="1" maxlength="70" required [(ngModel)]="employee.shopId" name="shopId" #shopIdModel="ngModel">
+      <div *ngIf="shopIdModel.invalid && (shopIdModel.dirty || shopIdModel.touched)" class="alert alert-danger">
+        <div *ngIf="shopIdModel.errors.required">Shop ID is required.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="about" id="aboutLabel">Shop about</label>
+      <textarea class="form-control" id="about" aria-describedby="aboutLabel" rows="4" maxlength="300" [(ngModel)]="employee.about"
+        name="about" #about="ngModel">
+      </textarea>
+    </div>
+    <div class="btn-toolbar" role="toolbar" aria-label="Action buttons">
+      <div class="btn-group mr-1" role="group" aria-label="Cancel group">
+        <button type="button" class="btn btn-primary" (click)="onCancel()">Back</button>
+      </div>
+      <div class="btn-group mr-4" role="group" aria-label="Save group">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+      <div class="btn-group mr-1" role="group" aria-label="Delete group" *ngIf="existed && !employee.isDeleted">
+        <button type="button" class="btn btn-warning" (click)="onDelete()">Delete</button>
+      </div>
+      <div class="btn-group mr-1" role="group" aria-label="UnDelete group" *ngIf="existed && employee.isDeleted">
+        <button type="button" class="btn btn-warning" (click)="onUndelete()">Undelete</button>
+      </div>
+      <div class="btn-group" role="group" aria-label="Purge group" *ngIf="existed && employee.isDeleted">
+        <button type="button" class="btn btn-danger" (click)="onPurge()">Purge</button>
+      </div>
+    </div>
+  </form>
+</div>
